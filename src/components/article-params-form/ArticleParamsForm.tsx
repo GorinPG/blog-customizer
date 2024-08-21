@@ -12,19 +12,34 @@ import {
 	fontColors,
 	backgroundColors,
 	contentWidthArr,
+	OptionType,
 } from 'src/constants/articleProps';
 
 import { FormEvent, useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 
 type ArticleParamsForm = {
-	formState: any;
-	setFormState: any;
-	formReset: () => void;
-	formSubmit: (e: FormEvent<HTMLFormElement>) => void;
+	formState: {
+		fontFamilyOption: OptionType;
+		fontColor: OptionType;
+		backgroundColor: OptionType;
+		contentWidth: OptionType;
+		fontSizeOption: OptionType;
+	};
+	setFormState: React.Dispatch<
+		React.SetStateAction<{
+			fontFamilyOption: OptionType;
+			fontColor: OptionType;
+			backgroundColor: OptionType;
+			contentWidth: OptionType;
+			fontSizeOption: OptionType;
+		}>
+	>;
+	resetForm: () => void;
+	submitForm: (e: FormEvent<HTMLFormElement>) => void;
 };
 
-export const ArticleParamsForm = (props: ArticleParamsForm) => {
+export function ArticleParamsForm(props: ArticleParamsForm) {
 	const [state, setState] = useState(false);
 
 	const toggleState = () => {
@@ -67,8 +82,8 @@ export const ArticleParamsForm = (props: ArticleParamsForm) => {
 		<>
 			<ArrowButton state={state} toggleState={toggleState} />
 			<aside
-				className={clsx(styles.container, state ? styles.container_open : '')}>
-				<form className={styles.form} onSubmit={props.formSubmit} ref={rootRef}>
+				className={clsx(styles.container, { [styles.container_open]: state })}>
+				<form className={styles.form} onSubmit={props.submitForm} ref={rootRef}>
 					<Text as='h2' size={31} weight={800} uppercase>
 						Задайте параметры
 					</Text>
@@ -134,11 +149,11 @@ export const ArticleParamsForm = (props: ArticleParamsForm) => {
 						title='ширина контейнера'
 					/>
 					<div className={styles.bottomContainer}>
-						<Button title='Сбросить' type='reset' onClick={props.formReset} />
+						<Button title='Сбросить' type='reset' onClick={props.resetForm} />
 						<Button title='Применить' type='submit' />
 					</div>
 				</form>
 			</aside>
 		</>
 	);
-};
+}
