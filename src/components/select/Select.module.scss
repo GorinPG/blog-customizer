@@ -1,22 +1,22 @@
-.selectWrapper {
+.dropdownWrapper {
 	position: relative;
-}
+  }
 
-.container {
+  .dropdownContainer {
 	display: flex;
 	flex-direction: column;
-	row-gap: 4px;
-}
+	gap: 4px;
+  }
 
-.arrow {
+  .arrowIndicator {
 	position: absolute;
 	top: 50%;
 	right: 6px;
 	margin-top: -12px;
 	transition: transform 0.2s ease-in-out, margin-top 0.2s ease-in-out;
-}
+  }
 
-.placeholder {
+  .displayText {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
@@ -24,30 +24,30 @@
 	width: 100%;
 	height: 50px;
 	padding: 15px 17px;
-	background: rgb(255 255 255);
-	outline: 1px solid #000000;
+	background: rgb(255, 255, 255);
+	outline: 1px solid #000;
 	cursor: pointer;
-}
+  }
 
-.placeholder[data-selected='true'] {
-	color: rgb(0 0 0);
-}
+  .displayText[data-selected='true'] {
+	color: rgb(0, 0, 0);
+  }
 
-.selectWrapper[data-is-active='true'] .arrow {
+  .dropdownWrapper[data-is-active='true'] .arrowIndicator {
 	margin-top: -14px;
 	transform: rotate(180deg);
-}
+  }
 
-.selectWrapper[data-is-active='true'] .placeholder {
-	outline: 3px solid #000000;
-}
+  .dropdownWrapper[data-is-active='true'] .displayText {
+	outline: 3px solid #000;
+  }
 
-.selectWrapper:not([data-is-active='true'])
-	.placeholder:not([data-status='invalid']):hover {
-	outline: 3px solid #000000;
-}
+  .dropdownWrapper:not([data-is-active='true'])
+	.displayText:not([data-status='invalid']):hover {
+	outline: 1px solid #ffc802;
+  }
 
-.select {
+  .optionList {
 	position: absolute;
 	z-index: 10;
 	display: grid;
@@ -56,152 +56,155 @@
 	margin: 0;
 	padding: 0;
 	list-style: none;
-	background-color: rgb(255 255 255 / 100%);
+	background-color: rgba(255, 255, 255, 1);
 	border-top: none;
-	outline: 3px solid #000000;
-}
+	outline: 3px solid #000;
+  }
 
-.option {
+  .optionItem {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
 	height: 30px;
-	padding: 5px;
-	padding: 15px 17px;
-	background-color: rgb(255 255 255 / 100%);
-	border: 1px;
+	padding: 5px 17px;
+	background-color: rgba(255, 255, 255, 1);
+	border: 1px solid transparent;
 	cursor: pointer;
-}
+  }
 
-.option[aria-selected='true'] {
-	background-color: rgb(0 0 0 / 5%);
-}
+  .optionItem[aria-selected='true'] {
+	background-color: rgba(0, 0, 0, 0.05);
+  }
 
-.option:hover {
+  .optionItem:hover {
+	background: var(--light-grey, #eeeeee);
+  }
+
+  .optionItem:active {
 	background: var(--grey, #c4c4c4);
-}
+  }
 
-@mixin option-color-before {
+  @mixin colorIndicatorBefore {
 	content: '';
 	width: 35px;
 	height: 35px;
 	margin-right: 10px;
-}
+  }
 
-.option-black::before {
-	@include option-color-before;
-	background-color: #000000;
-}
+  .optionBlack::before {
+	@include colorIndicatorBefore;
+	background-color: #000;
+  }
 
-@mixin option-color-after {
+  @mixin colorIndicatorAfter {
 	content: '';
 	position: absolute;
 	left: 26px;
 	width: 17px;
 	height: 17px;
-	border-radius: 100%;
-}
+	border-radius: 50%;
+  }
 
-.option-black[data-selected='true']::after {
-	@include option-color-after;
-	background-color: #ffffff;
-}
+  .optionBlack[data-selected='true']::after {
+	@include colorIndicatorAfter;
+	background-color: #fff;
+  }
 
-.option-white::before {
-	@include option-color-before;
+  .optionWhite::before {
+	@include colorIndicatorBefore;
 	box-sizing: border-box;
-	background-color: #ffffff;
-	border: 1px solid #000000;
-}
+	background-color: #fff;
+	border: 1px solid #000;
+  }
 
-.option-white[data-selected='true']::after {
-	@include option-color-after;
-	background-color: #000000;
-}
+  .optionWhite[data-selected='true']::after {
+	@include colorIndicatorAfter;
+	background-color: #000;
+  }
 
-.option-gray::before {
-	@include option-color-before;
+  .optionGray::before {
+	@include colorIndicatorBefore;
 	background-color: #c4c4c4;
-}
+  }
 
-.option-gray[data-selected='true']::after {
-	@include option-color-after;
-	background-color: #ffffff;
-}
+  .optionGray[data-selected='true']::after {
+	@include colorIndicatorAfter;
+	background-color: #fff;
+  }
 
-.option-pink::before {
-	@include option-color-before;
+  .optionPink::before {
+	@include colorIndicatorBefore;
 	background-color: #feafe8;
-}
+  }
 
-.option-pink[data-selected='true']::after {
-	@include option-color-after;
-	background-color: #ffffff;
-}
+  .optionPink[data-selected='true']::after {
+	@include colorIndicatorAfter;
+	background-color: #fff;
+  }
 
-.option-fuchsia::before {
-	@include option-color-before;
+  .optionFuchsia::before {
+	@include colorIndicatorBefore;
 	background-color: #fd24af;
-}
+  }
 
-.option-fuchsia[data-selected='true']::after {
-	@include option-color-after;
-	background-color: #ffffff;
-}
+  .optionFuchsia[data-selected='true']::after {
+	@include colorIndicatorAfter;
+	background-color: #fff;
+  }
 
-.option-yellow::before {
-	@include option-color-before;
+  .optionYellow::before {
+	@include colorIndicatorBefore;
 	background-color: #ffc802;
-}
+  }
 
-.option-yellow[data-selected='true']::after {
-	@include option-color-after;
-	background-color: #ffffff;
-}
+  .optionYellow[data-selected='true']::after {
+	@include colorIndicatorAfter;
+	background-color: #fff;
+  }
 
-.option-green::before {
-	@include option-color-before;
+  .optionGreen::before {
+	@include colorIndicatorBefore;
 	background-color: #80d994;
-}
+  }
 
-.option-green[data-selected='true']::after {
-	@include option-color-after;
-	background-color: #ffffff;
-}
+  .optionGreen[data-selected='true']::after {
+	@include colorIndicatorAfter;
+	background-color: #fff;
+  }
 
-.option-blue::before {
-	@include option-color-before;
+  .optionBlue::before {
+	@include colorIndicatorBefore;
 	background-color: #6fc1fd;
-}
+  }
 
-.option-blue[data-selected='true']::after {
-	@include option-color-after;
-	background-color: #ffffff;
-}
+  .optionBlue[data-selected='true']::after {
+	@include colorIndicatorAfter;
+	background-color: #fff;
+  }
 
-.option-purple::before {
-	@include option-color-before;
+  .optionPurple::before {
+	@include colorIndicatorBefore;
 	background-color: #5f0dee;
-}
+  }
 
-.option-purple[data-selected='true']::after {
-	@include option-color-after;
-	background-color: #ffffff;
-}
+  .optionPurple[data-selected='true']::after {
+	@include colorIndicatorAfter;
+	background-color: #fff;
+  }
 
-@mixin option-width-before {
+  @mixin widthIndicatorBefore {
 	content: '';
 	width: 25px;
 	height: 25px;
 	margin-right: 10px;
-}
+  }
 
-.option-wide::before {
-	@include option-width-before;
+  .optionWide::before {
+	@include widthIndicatorBefore;
 	background-image: url('./../../images/wide.svg');
 }
 
-.option-narrow::before {
-	@include option-width-before;
-	background-image: url('./../../images/narrow.svg');
+.optionNarrow::before {
+  @include widthIndicatorBefore;
+  background-image: url('./../../images/narrow.svg');
 }

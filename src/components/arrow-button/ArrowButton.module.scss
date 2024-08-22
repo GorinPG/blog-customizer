@@ -1,30 +1,38 @@
-.container {
+.wrapper {
 	position: fixed;
 	top: 31px;
 	display: flex;
-	flex-shrink: 0;
 	justify-content: center;
 	align-items: center;
-	box-sizing: border-box;
 	width: 100px;
 	height: 100px;
-	background-color: #000000;
-	border-right: 1px;
+	background-color: #000;
+	border-right: 1px solid transparent;
 	transition: transform 0.5s ease;
-}
-
-.container_open {
-	transform: translate(616px);
-}
-
-.arrow {
 	flex-shrink: 0;
+	box-sizing: border-box;
+  }
+
+  .wrapper:hover {
+	background-color: #ffc802;
+  }
+
+  .wrapper:active {
+	background-color: #787878;
+  }
+
+  .wrapper_open {
+	transform: translateX(616px);
+  }
+
+  .icon {
 	width: 48px;
 	height: 48px;
 	transform: rotate(180deg);
 	transition: transform 0.5s ease;
-}
+	flex-shrink: 0;
+  }
 
-.arrow_open {
+  .icon_open {
 	transform: rotate(0deg);
-}
+  }

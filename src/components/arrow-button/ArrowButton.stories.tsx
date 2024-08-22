@@ -1,20 +1,17 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
+import { ArrowButton, ArrowButtonProps } from './ArrowButton';
 
-import { ArrowButton } from './ArrowButton';
-
-const meta: Meta<typeof ArrowButton> = {
-	component: ArrowButton,
+const meta: Meta<ArrowButtonProps> = {
+  component: ArrowButton,
+  title: 'Components/ArrowButton',
 };
 
 export default meta;
-type Story = StoryObj<typeof ArrowButton>;
 
-export const ArrowButtonStory: Story = {
-	render: () => {
-		return (
-			<>
-				<ArrowButton />
-			</>
-		);
-	},
+const Template: Story<ArrowButtonProps> = (args) => <ArrowButton {...args} />;
+
+export const DefaultArrowButton = Template.bind({});
+DefaultArrowButton.args = {
+  isOpen: false,
+  onToggle: () => console.log('Button clicked'),
 };
