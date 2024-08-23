@@ -1,28 +1,34 @@
 import arrow from 'src/images/arrow.svg';
+
 import styles from './ArrowButton.module.scss';
+
 import clsx from 'clsx';
 
-export interface ArrowButtonProps {
-  isOpen: boolean;
-  onToggle: () => void;
-}
+/** Функция для обработки открытия/закрытия формы */
+export type OnClick = () => void;
 
-export const ArrowButton = ({ isOpen, onToggle }: ArrowButtonProps) => {
-  return (
-	<div
-	  onClick={onToggle}
-	  role='button'
-	  aria-label='Toggle article parameters form'
-	  tabIndex={0}
-	  className={clsx(styles.container, {
-		[styles.container_open]: isOpen,
-	  })}
-	>
-	  <img
-		src={arrow}
-		alt='иконка стрелочки'
-		className={clsx(styles.arrow, { [styles.arrow_open]: isOpen })}
-	  />
-	</div>
-  );
-};
+interface ArrowButtonProps {
+	state: boolean;
+	toggleState: OnClick;
+  }
+
+  export const ArrowButton: React.FC<ArrowButtonProps> = ({ state, toggleState }) => {
+	return (
+	  /* Не забываем указаывать role и aria-label атрибуты для интерактивных элементов */
+	  <div
+		onClick={toggleState}
+		role='button'
+		aria-label='Открыть/Закрыть форму параметров статьи'
+		tabIndex={0}
+		className={clsx(styles.container, {
+		  [styles.container_open]: state,
+		})}
+	  >
+		<img
+		  src={arrow}
+		  alt='иконка стрелочки'
+		  className={clsx(styles.arrow, { [styles.arrow_open]: state })}
+		/>
+	  </div>
+	);
+  };

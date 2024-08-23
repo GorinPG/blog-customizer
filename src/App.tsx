@@ -1,49 +1,51 @@
-import React, { useState, FormEvent } from 'react';
+import { CSSProperties, useState, FormEvent } from 'react';
+
 import { Article } from './components/article/Article';
 import { ArticleParamsForm } from './components/article-params-form/ArticleParamsForm';
 import { defaultArticleState } from './constants/articleProps';
-import './styles/index.scss';
-import styles from './styles/index.module.scss';
 
-export const App = () => {
-  const [currentPageState, setCurrentPageState] = useState(defaultArticleState);
-  const [currentFormState, setCurrentFormState] = useState(defaultArticleState);
+import './styles/index.scss';
+import layoutStyles from './styles/index.module.scss';
+
+export const App: React.FC = () => {
+  const [articleState, setArticleState] = useState(defaultArticleState);
+  const [settingsState, setSettingsState] = useState(defaultArticleState);
 
   const handleReset = () => {
-    setCurrentFormState(defaultArticleState);
-    setCurrentPageState(defaultArticleState);
+    setSettingsState(defaultArticleState);
+    setArticleState(defaultArticleState);
   };
 
-  const handleFormSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setCurrentPageState({
-      ...currentPageState,
-      fontFamilyOption: currentFormState.fontFamilyOption,
-      fontSizeOption: currentFormState.fontSizeOption,
-      fontColor: currentFormState.fontColor,
-      contentWidth: currentFormState.contentWidth,
-      backgroundColor: currentFormState.backgroundColor,
+    setArticleState({
+      ...articleState,
+      fontFamilyOption: settingsState.fontFamilyOption,
+      fontSizeOption: settingsState.fontSizeOption,
+      fontColor: settingsState.fontColor,
+      contentWidth: settingsState.contentWidth,
+      backgroundColor: settingsState.backgroundColor,
     });
   };
 
   return (
     <main
-      className={styles.main}
+      className={layoutStyles.main}
       style={
         {
-          '--font-family': currentPageState.fontFamilyOption.value,
-          '--font-size': currentPageState.fontSizeOption.value,
-          '--font-color': currentPageState.fontColor.value,
-          '--container-width': currentPageState.contentWidth.value,
-          '--bg-color': currentPageState.backgroundColor.value,
-        } as React.CSSProperties
+          '--font-family': articleState.fontFamilyOption.value,
+          '--font-size': articleState.fontSizeOption.value,
+          '--font-color': articleState.fontColor.value,
+          '--container-width': articleState.contentWidth.value,
+          '--bg-color': articleState.backgroundColor.value,
+        } as CSSProperties
       }
     >
       <ArticleParamsForm
-        formState={currentFormState}
-        setFormState={setCurrentFormState}
+        formState={settingsState}
+        setFormState={setSettingsState}
         resetForm={handleReset}
-        submitForm={handleFormSubmit}
+        submitForm={handleSubmit}
       />
       <Article />
     </main>

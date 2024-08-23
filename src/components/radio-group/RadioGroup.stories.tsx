@@ -1,35 +1,37 @@
-import { Meta, Story } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
+
 import { RadioGroup } from './RadioGroup';
-import { RadioGroupProps } from './RadioGroup';
 import { useState } from 'react';
 
-const meta: Meta<RadioGroupProps> = {
-  component: RadioGroup,
-  title: 'Components/RadioGroup',
+const meta: Meta<typeof RadioGroup> = {
+	component: RadioGroup,
 };
 
 export default meta;
+type Story = StoryObj<typeof RadioGroup>;
 
-const Template: Story<RadioGroupProps> = (args) => {
-  const [currentSelection, setCurrentSelection] = useState(args.options[0]);
+const RadioGroupWithState = () => {
+	const options = [
+		{ title: '1 опция', value: '1 опция', className: '' },
+		{ title: '2 опция', value: '2 опция', className: '' },
+		{ title: '3 опция', value: '3 опция', className: '' },
+		{ title: '4 опция', value: '4 опция', className: '' },
+	];
+	const [selected, setSelected] = useState(options[0]);
 
-  return (
-    <RadioGroup
-      {...args}
-      selected={currentSelection}
-      onChange={setCurrentSelection}
-    />
-  );
+	return (
+		<>
+			<RadioGroup
+				selected={selected}
+				name='radio'
+				onChange={setSelected}
+				options={options}
+				title='Название радиогруппы'
+			/>
+		</>
+	);
 };
 
-export const DefaultRadioGroup = Template.bind({});
-DefaultRadioGroup.args = {
-  options: [
-    { title: '1 опция', value: '1 опция', className: '' },
-    { title: '2 опция', value: '2 опция', className: '' },
-    { title: '3 опция', value: '3 опция', className: '' },
-    { title: '4 опция', value: '4 опция', className: '' },
-  ],
-  name: 'radio',
-  title: 'Название радиогруппы',
+export const RadioGroupStory: Story = {
+	render: () => <RadioGroupWithState />,
 };
