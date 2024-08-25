@@ -11,7 +11,7 @@ type Story = StoryObj<typeof ArrowButton>;
 
 export const ArrowButtonStory: Story = {
 	render: () => {
-	  const handleToggle = () => console.log('Button toggled');
-	  return <ArrowButton state={false} toggleState={handleToggle} />;
+		const handleToggle = () => console.log('Button toggled');
+		return <ArrowButton state={false} toggleState={handleToggle} />;
 	},
-  };
+};
