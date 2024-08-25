@@ -78,7 +78,7 @@
 }
 
 .option:hover {
-	background: var(--grey, #c4c4c4);
+	background: var(--light-grey, #eeeeee);
 }
 
 @mixin option-color-before {
@@ -204,4 +204,8 @@
 .option-narrow::before {
 	@include option-width-before;
 	background-image: url('./../../images/narrow.svg');
+}
+
+.option:hover {
+	background: var(--grey, #c4c4c4);
 }
